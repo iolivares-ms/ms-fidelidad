@@ -57,11 +57,11 @@ function addProduct(){
     	    <div class="main-pcard">
                 <h2 class="center-text">Comportamiento de siniestros</h2>
                 <div class="flex-row">
-                   <h3 class="good">Bueno</h3>
+                    <h3 class="bad">Malo</h3>
                     <span style="margin-left: 1.5rem;"></span>
                     <h3>Neutro</h3>
                     <span style="margin-left: 1.5rem;"></span>
-                    <h3 class="bad">Malo</h3>
+                    <h3 class="good">Bueno</h3>
                    
                 </div>
                 
@@ -75,11 +75,11 @@ function addProduct(){
 
 
                 <div class="flex-row">
-                    <h3 class="good">+30%</h3>
+                    <h3 class="bad">-30%</h3>
                     <span style="margin-left: 2rem;"></span>
                     <h3>0%</h3>
                     <span style="margin-left: 2rem;"></span>
-                    <h3 class="bad">-10%</h3>
+                    <h3 class="good">+10%</h3>
                  </div>
 
                  <div class="flex-row">
@@ -122,10 +122,10 @@ function updateSinister(index, newValue){
     percentage = 0
 
     if (newValue < 0) {
-        percentage = (aux*-1)*0.3
-    
+        percentage = (aux)*0.3
+      
     } else if (newValue > 0){
-        percentage = (aux*-1)*0.1
+        percentage = (aux)*0.1
     }
 
     products[index].sinister = percentage
