@@ -18,13 +18,33 @@
 
 .p-card {
   display: flex;
-  flex-direction: column;
-  width: 50%;
+  flex-direction: row;
+  width: 90%;
   background-color: rgb(182, 182, 182);
   align-items: center;
   justify-content: center;
   outline: rgb(0, 0, 0) solid;
 }
+
+.main-pcard{
+  width: 50%;
+}
+
+.blue {
+  border: solid blue;
+}
+
+.good {
+  color:green;
+}
+
+.bad {
+  color:red;
+}
+
+/* .secondary-pcard{
+
+} */
 
 input {
   margin-left: 0.5rem;
@@ -82,4 +102,8 @@ input {
 
 .sticky + .content {
   padding-top: 102px;
+}
+
+.center-text {
+  text-align: center;
 }

@@ -32,8 +32,9 @@ miu = 3
 
 function addProduct(){
     index = document.getElementById("products").value
-    html = `<div class="p-card">
-                <h2 id="product${products.length}">${ptypes[index].name}</h2>
+    html = `<div class="p-card" >
+            <div class="main-pcard">
+                <h2 id="product${products.length}" class="center-text">${ptypes[index].name}</h2>
                 <div class="flex-row">
                    <h3>Antiguedad (Años): </h3>
                    <input style="width: 15%;" type="number" value=1 onchange="updateProduct(${products.length},this.value,false)">
@@ -51,7 +52,45 @@ function addProduct(){
                     <h3>Puntos de Producto: </h3>
                     <input style="width: 15%;" type="number" value=${ptypes[index].pp} onchange="updateProduct(${products.length},this.value,true)">
                  </div>
-            </div>>`
+            </div>
+
+    	    <div class="main-pcard">
+                <h2 class="center-text">Comportamiento de siniestros</h2>
+                <div class="flex-row">
+                   <h3 class="good">Bueno</h3>
+                    <span style="margin-left: 1.5rem;"></span>
+                    <h3>Neutro</h3>
+                    <span style="margin-left: 1.5rem;"></span>
+                    <h3 class="bad">Malo</h3>
+                   
+                </div>
+                
+            <div class="flex-row">
+                
+                <div class="slidecontainer">
+                    <span style="margin-left: 2rem;"></span>
+                    <input style="width: 70%;" type="range" min="-100" max="100" value="0" class="slider" oninput="updateSinister(${products.length}, this.value)" step="5">
+                  </div>
+            </div>
+
+
+                <div class="flex-row">
+                    <h3 class="good">+30%</h3>
+                    <span style="margin-left: 2rem;"></span>
+                    <h3>0%</h3>
+                    <span style="margin-left: 2rem;"></span>
+                    <h3 class="bad">-10%</h3>
+                 </div>
+
+                 <div class="flex-row">
+                    <h3>Puntos Adicionales: </h3>
+                    <span style="margin-left: 0.5rem;"></span>
+                    <h3 id="xpoints${products.length}"> 0 <h3>
+                 </div>
+            </div>
+
+
+            </div>`
     const node = new DOMParser().parseFromString(html, "text/html").body
     .firstElementChild;
     document.getElementById("pcolumn").appendChild(node)
@@ -59,7 +98,8 @@ function addProduct(){
     products.push({
         type: ptypes[index].name,
         ant: 1,
-        pp: ptypes[index].pp
+        pp: ptypes[index].pp,
+        sinister: 0
     })
     console.log(products)
     updateTier()
@@ -72,6 +112,23 @@ function updateProduct(index,newValue, ispp){
         products[index].ant = parseInt(newValue)
     }
     console.log(products)
+    updateTier()
+}
+
+function updateSinister(index, newValue){
+    aux = newValue/100
+
+    console.log(newValue);
+    percentage = 0
+
+    if (newValue < 0) {
+        percentage = (aux*-1)*0.3
+    
+    } else if (newValue > 0){
+        percentage = (aux*-1)*0.1
+    }
+
+    products[index].sinister = percentage
     updateTier()
 }
 
@@ -131,9 +188,15 @@ function updateTier(){
 
         ant = 1+(product.ant*am)+(fm*document.getElementById(`fr${index}`).value)
         log = Math.log10(product.pp)/Math.log10(miu*pa)
-        sumacc += ant*log
 
-        totalProduct = ant*log
+        aditionalPoints = ant*log*product.sinister
+        document.getElementById(`xpoints${index}`).innerHTML = `${aditionalPoints.toFixed(2)}`
+
+        totalProduct = (ant*log)+(aditionalPoints)
+
+        sumacc += totalProduct
+
+        
         document.getElementById(`product${index}`).innerHTML =`${product.type} > ${totalProduct.toFixed(2)}pts`
 
     })
@@ -150,6 +213,7 @@ function updateTier(){
     document.getElementById("points").innerHTML = points
     updateTierPic(points)
 }
+
 
 function updateTierPic(points){
 
