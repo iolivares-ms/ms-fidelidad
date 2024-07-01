@@ -37,17 +37,29 @@
     <h1>Demo en vivo</h1>
     <div class="flex-row">
         <div class="flex-column half"> 
-            <h2>Asegurado: Isaac Olivares</h2>
-            <h2>Puntos: </h2>
-            <h2 id="points">0</h2>
+           
+            
+          
+            <div class="flex-row" id="myHeader" style="background-color: white; border: solid gray; z-index: 10;"> 
+                <h1 style="width: 25rem; margin-left: 5rem;">Asegurado: Isaac Olivares</h1>
+                <span style="margin-left: 2rem;"></span>
+                <h1>Puntos: </h1>
+                <span style="margin-left: 1rem;"></span>
+                <h1 id="points">0</h1>
+                <span style="margin-left: 10rem;"></span>
+                <div class="flex-column" id="tier" style="margin-right: 5rem;"> 
+                    <img src="assets/silver.jpg" alt="silver" style="width:100px;height:100px;">
+                    <h2>Plata</h2>
+                </div>
+
+            </div>
+
+           
         </div>
-        <div class="flex-column" id="tier"> 
-            <img src="assets/silver.jpg" alt="silver" style="width:100px;height:100px;">
-            <p>Plata</p>
-        </div>
+       
       
     </div>
-    <div class="flex-row">
+    <div class="flex-row content">
         <div class="flex-column half" id="pcolumn"> 
             <h2>Productos del asegurado</h2>
 
@@ -88,6 +100,16 @@
                     <input type="range" min="0" max="100" value="20" class="slider" oninput="updateHiper(1,this.value)" step="5">
                   </div>
             </div>
+
+            <div class="flex-row">
+                <h3>FM: </h3>
+                <h3 id="fm" style="width: 3rem;"> 0.10 </h3>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="10" class="slider" oninput="updateHiper(3,this.value)" step="5">
+                  </div>
+            </div>
+
+
             <div class="flex-row">
                 <h3>µ: </h3>
                 <h3 id="miu" style="width: 3rem;"> 3 </h3>
@@ -96,8 +118,12 @@
                   </div>
             </div>
         </div>
+
+     
         
     </div>
+
+    
     <!-- <button onclick="test()"> HOLAXD</button> -->
     <script src="index.js"></script>
 
