@@ -54,7 +54,7 @@ function addProduct(){
                  </div>
             </div>
 
-    	    <div class="main-pcard">
+    <!--	    <div class="main-pcard">
                 <h2 class="center-text">Comportamiento de siniestros</h2>
                 <div class="flex-row">
                     <h3 class="bad">Malo</h3>
@@ -87,7 +87,8 @@ function addProduct(){
                     <span style="margin-left: 0.5rem;"></span>
                     <h3 id="xpoints${products.length}"> 0 <h3>
                  </div>
-            </div>
+            </div>                
+             -->
 
 
             </div>`
@@ -202,7 +203,7 @@ function updateTier(){
     })
     productNames = []
     products.forEach(auxproduct => {
-        productNames.push(auxproduct.type)
+        productNames.push(auxproduct.type.substring(0, 2))
     })
 
     pu = new Set(productNames).size
