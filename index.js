@@ -22,6 +22,17 @@ ptypes = [{name:"SI | Panamá",pp:50},
     {name:"PA | Pyme",pp:10},
     {name:"PA | Otros",pp:10},
     ]
+
+ptypesPanama = [{name:"SI | Panamá",pp:100},
+    {name:"SI | Integral",pp:130},
+    {name:"SI | Vital",pp:150},
+    {name:"SI | Premier",pp:200},
+    {name:"PA | Multiriesgo Residencial",pp:150},
+    {name:"MA | Ap",pp:40},
+    {name:"MA | Vida",pp:60},
+    {name:"MA | Funerario",pp:30},
+    {name:"MA | Pago Unico Cancer",pp:30},
+    {name:"MA | Renta",pp: 60},]
         
 products = []
 threshold = [0,10,20,30]
@@ -30,12 +41,15 @@ am = 0.2
 fm = 0.1
 miu = 3
 ai = 0
+venezuelaSelected = true
 
 function addProduct(){
+
+    ptypeReference = (venezuelaSelected) ? ptypes : ptypesPanama
     index = document.getElementById("products").value
     html = `<div class="p-card" >
             <div class="main-pcard">
-                <h2 id="product${products.length}" class="center-text">${ptypes[index].name}</h2>
+                <h2 id="product${products.length}" class="center-text">${ptypeReference[index].name}</h2>
                 <div class="flex-row">
                    <h3>Antiguedad (Años): </h3>
                    <input style="width: 15%;" type="number" value=1 onchange="updateProduct(${products.length},this.value,false)">
@@ -51,7 +65,7 @@ function addProduct(){
                 </div>
                 <div class="flex-row">
                     <h3>Puntos de Producto: </h3>
-                    <input style="width: 15%;" type="number" value=${ptypes[index].pp} onchange="updateProduct(${products.length},this.value,true)">
+                    <input style="width: 15%;" type="number" value=${ptypeReference[index].pp} onchange="updateProduct(${products.length},this.value,true)">
                  </div>
             </div>
 
@@ -98,9 +112,9 @@ function addProduct(){
     document.getElementById("pcolumn").appendChild(node)
 
     products.push({
-        type: ptypes[index].name,
+        type: ptypeReference[index].name,
         ant: 1,
-        pp: ptypes[index].pp,
+        pp: ptypeReference[index].pp,
         sinister: 0
     })
     console.log(products)
@@ -141,12 +155,12 @@ function updateThreshold(index, newValue){
 
 
 
-function loadProducts() {
+function loadProducts(pArray) {
     html  = `<label for="products">Comprar producto</label>
                 <select name="products" id="products">
                     `
 
-    ptypes.forEach((product, i) => {
+    pArray.forEach((product, i) => {
        html+= `<option value=${i}>${product.name}</option>`
     });
     html+="</select>"
@@ -249,7 +263,19 @@ function changeAssignIndex(){
     updateTier()
 }
 
-loadProducts()
+function changeCountry(){
+    countryIndex = document.getElementById("countrySelect").value
+    console.log(countryIndex)
+    if(countryIndex == 0){
+        loadProducts(ptypes)
+        venezuelaSelected = true
+    } else {
+        loadProducts(ptypesPanama)
+        venezuelaSelected = false
+    }
+}
+
+loadProducts(ptypes)
 
 
 // When the user scrolls the page, execute stickyHeader

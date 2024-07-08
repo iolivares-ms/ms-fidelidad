@@ -63,9 +63,22 @@
     <div class="flex-row content">
         <div class="flex-column half" id="pcolumn"> 
             <h2>Productos del asegurado</h2>
+
             <div class="flex-row">
                 
-                <div >
+                <div>
+                    <label for="countrySelect">Escoger País</label>
+                    <select name="countrySelect" id="countrySelect">
+                       <option value=0>Venezuela</option>
+                       <option value=1>Panamá</option>
+                    </select>
+                </div>
+                <button onclick="changeCountry()"> Cambiar</button>
+            </div>
+
+            <div class="flex-row">
+                
+                <div>
                     <label for="tierAssign">Asignar Rango</label>
                     <select name="tierAssign" id="tierAssign">
                        <option value=0>Plata</option>
