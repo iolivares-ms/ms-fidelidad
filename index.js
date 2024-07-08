@@ -24,11 +24,12 @@ ptypes = [{name:"SI | Panamá",pp:50},
     ]
         
 products = []
-threshold = [10,20,30]
+threshold = [0,10,20,30]
 vm = 0.1
 am = 0.2
 fm = 0.1
 miu = 3
+ai = 0
 
 function addProduct(){
     index = document.getElementById("products").value
@@ -191,7 +192,7 @@ function updateTier(){
         log = Math.log10(product.pp)/Math.log10(miu*pa)
 
         aditionalPoints = ant*log*product.sinister
-        document.getElementById(`xpoints${index}`).innerHTML = `${aditionalPoints.toFixed(2)}`
+        //document.getElementById(`xpoints${index}`).innerHTML = `${aditionalPoints.toFixed(2)}`
 
         totalProduct = (ant*log)+(aditionalPoints)
 
@@ -211,8 +212,10 @@ function updateTier(){
 
     points = ((1+(pu*vm))*sumacc).toFixed(0)
 
-    document.getElementById("points").innerHTML = points
-    updateTierPic(points)
+    realPoints = Math.max(threshold[this.ai],points)
+
+    document.getElementById("points").innerHTML = realPoints
+    updateTierPic(realPoints)
 }
 
 
@@ -220,15 +223,15 @@ function updateTierPic(points){
 
     html = ""
 
-    if (points < threshold[0]) {
+    if (points < threshold[1]) {
         html = `<div>
         <img src="assets/silver.jpg" alt="silver" style="width:100px;height:100px;">
             <h2>Plata</h2>
             </div>`
-    } else if (points <threshold[1]){
+    } else if (points <threshold[2]){
         html =`<div><img src="assets/gold.png" alt="gold" style="width:100px;height:100px;">
             <h2>Oro</h2></div>`
-    } else if (points < threshold[2]) {
+    } else if (points < threshold[3]) {
         html =`<div><img src="assets/platinum.png" alt="platinum" style="width:100px;height:100px;">
             <h2>Platino</h2></div>`
     } else {
@@ -241,11 +244,16 @@ function updateTierPic(points){
     document.getElementById("tier").appendChild(node)
 }
 
+function changeAssignIndex(){
+    ai = document.getElementById("tierAssign").value
+    updateTier()
+}
+
 loadProducts()
 
 
-// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
+// When the user scrolls the page, execute stickyHeader
+window.onscroll = function() {stickyHeader()};
 
 // Get the header
 var header = document.getElementById("myHeader");
@@ -254,10 +262,11 @@ var header = document.getElementById("myHeader");
 var sticky = header.offsetTop;
 
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
+function stickyHeader() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky");
   } else {
     header.classList.remove("sticky");
   }
 }
+

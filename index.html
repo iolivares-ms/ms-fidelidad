@@ -63,7 +63,19 @@
     <div class="flex-row content">
         <div class="flex-column half" id="pcolumn"> 
             <h2>Productos del asegurado</h2>
-
+            <div class="flex-row">
+                
+                <div >
+                    <label for="tierAssign">Asignar Rango</label>
+                    <select name="tierAssign" id="tierAssign">
+                       <option value=0>Plata</option>
+                       <option value=1>Oro</option>
+                       <option value=2>Platino</option>
+                       <option value=3>Diamante</option>
+                    </select>
+                </div>
+                <button onclick="changeAssignIndex()"> Cambiar</button>
+            </div>
             <div class="flex-row">
                 
                 <div id="select">
@@ -79,11 +91,11 @@
             <h2>Hiperparámetros</h2>
             <div class="flex-row">
                 <p> Plata &lt </p>
-                <input style="width: 5%" type="number" value=10 onchange="updateThreshold(0, this.value)">
+                <input style="width: 5%" type="number" value=10 onchange="updateThreshold(1, this.value)">
                 <p>&lt Oro &lt </p>
-                <input style="width: 5%" type="number" value=20 onchange="updateThreshold(1, this.value)">
+                <input style="width: 5%" type="number" value=20 onchange="updateThreshold(2, this.value)">
                 <p>&lt Platino &lt </p>
-                <input style="width: 5%" type="number" value=30 onchange="updateThreshold(2, this.value)">
+                <input style="width: 5%" type="number" value=30 onchange="updateThreshold(3, this.value)">
                 <p>&lt Diamante </p>
             </div>
 
